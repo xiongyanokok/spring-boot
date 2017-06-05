@@ -26,12 +26,9 @@
 
     <!-- debug level -->
     <appender name="debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!-- file name -->
         <File>${DEBUG_LOG_PATH}.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!--output file name -->
             <fileNamePattern>${DEBUG_LOG_PATH}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <!-- MAXHISTORY days old files will be delete -->
             <maxHistory>${MAXHISTORY}</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>${MAXFILESIZE}</maxFileSize>

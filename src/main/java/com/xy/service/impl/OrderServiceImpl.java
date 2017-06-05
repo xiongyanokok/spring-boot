@@ -11,6 +11,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xy.exception.RestCustomException;
 import com.xy.mapper.OrderMapper;
 import com.xy.model.Order;
 import com.xy.service.OrderService;
@@ -27,7 +28,11 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	@Transactional
 	public void save(Order order) {
-		orderMapper.insert(order);
+		try {
+			orderMapper.insert(order);
+		} catch (Exception e) {
+			throw new RestCustomException(e);
+		}
 	}
 	
 	@Override
@@ -47,6 +52,10 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public List<Order> listOrderByMap(Map<String, Object> map) {
-		return orderMapper.listOrderByMap(map);
+		try {
+			return orderMapper.listOrderByMap(map);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }
