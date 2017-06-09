@@ -6,7 +6,7 @@ package com.xy.exception;
  * @author xiongyan
  * @date 2017年3月7日 下午4:35:32
  */
-public class RestCustomException extends RuntimeException {
+public class BootCustomException extends RuntimeException {
 
 	/**
 	 * 
@@ -18,29 +18,29 @@ public class RestCustomException extends RuntimeException {
 	 */
 	private Integer code;
 	
-	public RestCustomException() {
+	public BootCustomException() {
         super();
     }
 
-    public RestCustomException(String message) {
+    public BootCustomException(String message) {
         super(message);
     }
 
-    public RestCustomException(Integer code, String message) {
+    public BootCustomException(Integer code, String message) {
         super(message);
         this.code = code;
     }
     
-    public RestCustomException(Integer code, String message, Exception e) {
-    	super(message, e.getCause());
+    public BootCustomException(Integer code, String message, Throwable cause) {
+    	super(message, cause);
     	this.code = code;
     }
     
-    public RestCustomException(String message, Throwable cause) {
+    public BootCustomException(String message, Throwable cause) {
     	super(message, cause);
     }
     
-    public RestCustomException(Throwable cause) {
+    public BootCustomException(Throwable cause) {
     	super(cause);
     }
 

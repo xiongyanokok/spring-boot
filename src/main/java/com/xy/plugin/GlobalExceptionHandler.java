@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.xy.exception.RestCustomException;
+import com.xy.exception.BootCustomException;
 import com.xy.pojo.Result;
 
 /**
@@ -20,22 +20,25 @@ import com.xy.pojo.Result;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 	
+	/**
+	 * logger
+	 */
 	private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
 	/**
-	 * RestCustomException 全局异常
+	 * BootCustomException 全局异常
 	 * 
 	 * @param e
 	 * @param response
 	 * @return
 	 */
-	@ExceptionHandler(RestCustomException.class)
+	@ExceptionHandler(BootCustomException.class)
     @ResponseBody
-    public Result<String> exceptionHandler(RestCustomException e, HttpServletResponse response) {
-		logger.error("RestCustomException：", e);
+    public Result<String> exceptionHandler(BootCustomException e, HttpServletResponse response) {
 		if (null == e.getCode()) {
-			return exceptionHandler(e, response);
+			return handleAllException(e, response);
 		}
+		logger.error("RestCustomException：", e);
 		return Result.error(e.getCode(), e.getMessage());
     } 
 	
@@ -48,7 +51,7 @@ public class GlobalExceptionHandler {
 	 */
 	@ExceptionHandler(RuntimeException.class)
     @ResponseBody
-    public Result<String> exceptionHandler(RuntimeException e, HttpServletResponse response) {
+    public Result<String> handleAllException(RuntimeException e, HttpServletResponse response) {
 		logger.error("RuntimeException：", e);
 		return Result.SystemError;
     } 

@@ -1,18 +1,24 @@
 package com.xy.controller;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.xy.exception.BootCustomException;
+import com.xy.exception.ErrorCode;
+import com.xy.model.Order;
 import com.xy.pojo.Result;
+import com.xy.service.OrderService;
 
 /**
  * rest 
@@ -23,6 +29,9 @@ import com.xy.pojo.Result;
 @RestController
 @RequestMapping("/restful")
 public class RestfulController extends BaseController {
+	
+	@Autowired
+	private OrderService orderService;
 
 	/**
 	 * logger
@@ -30,10 +39,13 @@ public class RestfulController extends BaseController {
 	private static final Logger logger = LoggerFactory.getLogger(RestfulController.class);
 	
 	@RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
-	public Result<Map<String, String>> user(@PathVariable Integer userId) {
-		Map<String, String> map = new HashMap<>();
-		map.put("id", "111");
+	public Result<Map<String, Object>> user(@PathVariable Integer userId) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("userId", "111");
 		map.put("name", "熊焱");
+
+		List<Order> orders = orderService.listOrderByMap(null);
+		Order order = orderService.getOrderByOrderId(0);
 		return Result.success(map);
 	}
 	
