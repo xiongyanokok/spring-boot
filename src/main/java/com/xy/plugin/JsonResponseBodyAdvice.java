@@ -7,6 +7,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -15,7 +18,6 @@ import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpRequest;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
@@ -36,7 +38,9 @@ import com.xy.annotation.JsonFilter;
 @ControllerAdvice
 public class JsonResponseBodyAdvice<T> implements ResponseBodyAdvice<T> {
 	
-	private static final Map<Integer, ObjectMapper> objectMapperMap = new ConcurrentHashMap<Integer, ObjectMapper>();
+	private static final Logger logger = LoggerFactory.getLogger(JsonResponseBodyAdvice.class);
+	
+	private static final Map<Integer, ObjectMapper> objectMapperMap = new ConcurrentHashMap<>();
 	
 	@Override
 	public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
@@ -49,7 +53,6 @@ public class JsonResponseBodyAdvice<T> implements ResponseBodyAdvice<T> {
 			Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
 		HttpServletRequest servletRequest = ((ServletServerHttpRequest) request).getServletRequest();
 		String jsonpFunction = servletRequest.getParameter("callback");
-		
 		JsonFilter jsonFilter = returnType.getMethodAnnotation(JsonFilter.class);
 		if (null != jsonFilter) {
 			ClassAnnotationKey key = new ClassAnnotationKey(selectedConverterType, returnType.getMethodAnnotations());
@@ -71,21 +74,22 @@ public class JsonResponseBodyAdvice<T> implements ResponseBodyAdvice<T> {
 			try {
 				ObjectWriter writer = objectMapper.writer();
 				JsonGenerator generator = writer.getFactory().createGenerator(response.getBody(), JsonEncoding.UTF8);
-				if (!StringUtils.isEmpty(jsonpFunction)) {
+				if (StringUtils.isNotEmpty(jsonpFunction)) {
 					generator.writeRaw("/**/");
 					generator.writeRaw(jsonpFunction + "(" );
-				}
-				writer.writeValue(generator, body);
-				if (!StringUtils.isEmpty(jsonpFunction)) {
+					writer.writeValue(generator, body);
 					generator.writeRaw(");");
+				} else {
+					writer.writeValue(generator, body);
 				}
 				generator.flush();
 				return null;
 			} catch (IOException e) {
+				logger.error("失败：", e);
 			}
 		}
 		
-		if (!StringUtils.isEmpty(jsonpFunction)) {
+		if (StringUtils.isNotEmpty(jsonpFunction)) {
 			MappingJacksonValue bodyContainer = new MappingJacksonValue(body);
 			MediaType mediaType = new MediaType("application", "javascript");
 			response.getHeaders().setContentType(mediaType);
@@ -115,9 +119,7 @@ public class JsonResponseBodyAdvice<T> implements ResponseBodyAdvice<T> {
 			ClassAnnotationKey that = (ClassAnnotationKey) o;
 			if (!annotations.equals(that.annotations))
 				return false;
-			if (!classKey.equals(that.classKey))
-				return false;
-			return true;
+			return classKey.equals(that.classKey);
 		}
 
 		public int hashCode() {

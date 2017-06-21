@@ -227,7 +227,7 @@ public class MongoPropertiesThree {
 			if (options == null) {
 				options = MongoClientOptions.builder().build();
 			}
-			List<MongoCredential> credentials = new ArrayList<MongoCredential>();
+			List<MongoCredential> credentials = new ArrayList<>();
 			if (hasCustomCredentials()) {
 				String database = this.authenticationDatabase == null
 						? getMongoClientDatabase() : this.authenticationDatabase;

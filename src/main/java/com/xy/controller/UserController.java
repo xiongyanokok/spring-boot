@@ -32,7 +32,6 @@ public class UserController {
 	
 	@RequestMapping(value = "/class/{classId}", method = RequestMethod.GET)
 	public Class getClass(@PathVariable Integer classId) {
-		System.out.println(CommonDisconf.getZookeeperAddress());
 		return classService.getClassById(classId);
 	}
 	
@@ -45,8 +44,6 @@ public class UserController {
 		user.setXxx("xxx");
 		
 		redisConfig.set("xy", "响应okok");
-		System.out.println(redisConfig.get("xy"));
-		
 		
 		return user;
 	}
@@ -58,7 +55,6 @@ public class UserController {
 		map.put("username", username);
 		map.put("time", new Date());
 		map.putAll(body);
-		System.out.println(user.toString());
 		return map;
 	}
 
@@ -67,7 +63,6 @@ public class UserController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("username", username);
 		map.putAll(body);
-		System.out.println(user.toString());
 		return map;
 	}
 }

@@ -11,15 +11,29 @@ import java.lang.annotation.Target;
  * @author xiongyan
  * @date 2016年12月22日 上午11:36:22
  */
-@Target({ElementType.METHOD})
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Sign {
-
+public @interface Signature {
+	
 	/**
 	 * 签名类型
 	 * 
 	 * @return
 	 */
-	String type() default "MD5";
+	String signType() default "MD5";
 
+	/**
+	 * 签名字段
+	 * 
+	 * @return
+	 */
+	String signField() default "sign";
+	
+	/**
+	 * 密钥KEY
+	 * 
+	 * @return
+	 */
+	String signKey();
+	
 }

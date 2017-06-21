@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageHelper;
-import com.xy.annotation.Sign;
+import com.xy.annotation.Signature;
 import com.xy.model.Order;
 import com.xy.service.OrderService;
 
@@ -38,7 +38,7 @@ public class OrderController {
 	private MongoTemplate mongoTemplateThree;
 	
 	@RequestMapping(value = "/order/save", method = RequestMethod.GET)
-	@Sign
+	@Signature(signKey="xxx")
 	public Map<String, Object> getOrder(@ModelAttribute Order order) {
 		Map<String, Object> map = new HashMap<>();
 		try {
@@ -46,7 +46,6 @@ public class OrderController {
 			map.put("code", 0); 
 			map.put("msg", "保存成功"); 
 		} catch (Exception e) {
-			e.printStackTrace();
 			map.put("code", -1); 
 			map.put("msg", "保存失败"); 
 		}
