@@ -38,7 +38,7 @@
 			<id>dev</id>
 			<properties>
 				<disconf.env>dev</disconf.env>
-				<disconf.addr>10.10.18.102:8901,10.10.18.103:8901</disconf.addr>
+				<disconf.addr>127.0.0.1:8080</disconf.addr>
 				<disconf.download.dir>/usr/local/tomcat/disconf/download/es</disconf.download.dir>
 				<disconf.app>es_hexun_com</disconf.app>
 				<disconf.version>1_0_0_0</disconf.version>
@@ -170,7 +170,7 @@
 		<dependency>
 			<groupId>com.baidu.disconf</groupId>
 			<artifactId>disconf-client</artifactId>
-			<version>2.6.36</version>
+			<version>2.6.36-xy</version>
 		</dependency>
 			
 		<!-- dubbo -->

@@ -10,7 +10,11 @@ import com.baidu.disconf.client.common.annotations.DisconfFileItem;
  * @date 2016年4月14日 上午10:02:35
  */
 @DisconfFile(filename = "common.properties")
-public final class CommonDisconf {
+public class CommonDisconf {
+	
+	private CommonDisconf() {
+		
+	}
 
 	private static String zookeeperAddress;
 

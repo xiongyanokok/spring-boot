@@ -21,12 +21,7 @@ public class Application {
 	
 	@Bean
 	public EmbeddedServletContainerCustomizer containerCustomizer() {
-		return new EmbeddedServletContainerCustomizer() {
-			@Override
-			public void customize(ConfigurableEmbeddedServletContainer container) {
-				container.setSessionTimeout(86400); // 一天
-			}
-		};
+		return (ConfigurableEmbeddedServletContainer container) -> container.setSessionTimeout(86400);
 	}
 	
 	public static void main(String[] args) {
