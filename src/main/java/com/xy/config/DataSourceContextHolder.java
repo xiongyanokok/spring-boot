@@ -23,14 +23,14 @@ public class DataSourceContextHolder {
 	 * 设置读写数据源
 	 */
 	public static void write() {
-		contextHolder.set(DataSourceType.writeDataSource);
+		contextHolder.set(DataSourceType.WRITEDATASOURCE);
 	}
 	
 	/**
 	 * 设置读数据源
 	 */
 	public static void read() {
-		contextHolder.set(DataSourceType.readDataSource);
+		contextHolder.set(DataSourceType.READDATASOURCE);
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class DataSourceContextHolder {
 	 * @return
 	 */
 	public static boolean isWriteDB() {
-		return DataSourceType.writeDataSource.equals(getDataSourceType());
+		return DataSourceType.WRITEDATASOURCE.equals(getDataSourceType());
 	}
 	
 	/**

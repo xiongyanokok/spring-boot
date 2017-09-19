@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 
 /**
  * redis 配置
@@ -17,36 +16,33 @@ import org.springframework.data.redis.core.StringRedisTemplate;
  */
 @Configuration
 @EnableCaching
-public class RedisConfiguration {
+public class RedisConfiguration<K, T> {
 
 	@Autowired
-	private StringRedisTemplate stringRedisTemplate;
-
-	@Autowired
-	private RedisTemplate<Object, Object> redisTemplate;
+	private RedisTemplate<K, T> redisTemplate;
 
 	@Bean
 	public CacheManager cacheManager() {
 		return new RedisCacheManager(redisTemplate);
 	}
 
-	public void set(String key, String value) {
-		this.stringRedisTemplate.opsForValue().set(key, value);
+	public void set(K k, T t) {
+		this.redisTemplate.opsForValue().set(k, t);
 	}
 	
-	public void set(String key, String value, long offset) {
-		this.stringRedisTemplate.opsForValue().set(key, value, offset);
+	public void set(K k, T t, long offset) {
+		this.redisTemplate.opsForValue().set(k, t, offset);
 	}
 
-	public String get(String key) {
-		return this.stringRedisTemplate.opsForValue().get(key);
+	public T get(K k) {
+		return this.redisTemplate.opsForValue().get(k);
 	}
 	
-	public void delete(String key) {
-		this.stringRedisTemplate.delete(key);
+	public void delete(K k) {
+		this.redisTemplate.delete(k);
 	}
 	
-	public Boolean exists(String key) {
-		return this.stringRedisTemplate.hasKey(key);
+	public Boolean exists(K k) {
+		return this.redisTemplate.hasKey(k);
 	}
 }

@@ -6,12 +6,12 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://code.alibabatech.com/schema/dubbo
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
-
+        
 	<!-- 消费方应用名称 -->
 	<dubbo:application name="consumer" />
 
-	<!-- 使用zookeeper作为注册中心，zookeeper服务器地址 ${spring.zookeeper.address}-->
-	<dubbo:registry protocol="zookeeper" address="10.0.202.63:2181,10.0.202.63:2182" />
+	<!-- 使用zookeeper作为注册中心，zookeeper服务器地址 -->
+	<dubbo:registry protocol="zookeeper" address="${spring.zookeeper.address}" />
 	
 	<!-- dubbo协议 -->
 	<dubbo:protocol name="dubbo" port="20880" />

@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.2.RELEASE</version>
+		<version>1.5.3.RELEASE</version>
 	</parent>
 
 	<build>
@@ -38,8 +38,8 @@
 			<id>dev</id>
 			<properties>
 				<disconf.env>dev</disconf.env>
-				<disconf.addr>127.0.0.1:8080</disconf.addr>
-				<disconf.download.dir>/usr/local/tomcat/disconf/download/es</disconf.download.dir>
+				<disconf.addr>10.10.18.102:8901,10.10.18.103:8901</disconf.addr>
+				<disconf.download.dir>c:/disconf/download/es</disconf.download.dir>
 				<disconf.app>es_hexun_com</disconf.app>
 				<disconf.version>1_0_0_0</disconf.version>
 			</properties>
@@ -96,6 +96,11 @@
 		    <artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 		
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>springloaded</artifactId>
+		</dependency>
+		
 		<dependency>  
       		<groupId>org.springframework.boot</groupId>  
       		<artifactId>spring-boot-starter-data-redis</artifactId>  
@@ -106,31 +111,34 @@
 		    <artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
 		
+		<!-- mysql -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<!-- mysql -->
+		
+		<!-- xml 格式返回
 		<dependency>
 			<groupId>com.fasterxml.jackson.jaxrs</groupId>
 			<artifactId>jackson-jaxrs-xml-provider</artifactId>
-		</dependency>
+		</dependency> -->
 		
-		
-		<!-- druid数据库连接池 -->
+		<!-- druid -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
 			<version>1.0.26</version>
 		</dependency>
+		<!-- druid -->
 		
-		<!-- springboot的mybatis -->
+		<!-- mybatis-springboot -->
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-		
-		<!-- MySql数据库驱动 -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-		</dependency>
+		<!-- mybatis-springboot -->
 		
 		<!-- pagehelper -->
 		<dependency>
@@ -138,13 +146,7 @@
 			<artifactId>pagehelper</artifactId>
 			<version>4.1.6</version>
 		</dependency>
-		
-		<!-- Springboot 热部署 -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<optional>true</optional>
-		</dependency>
+		<!-- pagehelper -->
 		
 		<!-- resteasy -->
 		<dependency>
@@ -172,12 +174,13 @@
 			<artifactId>disconf-client</artifactId>
 			<version>2.6.36-xy</version>
 		</dependency>
-			
+		<!-- disconf -->
+		
 		<!-- dubbo -->
 		<dependency>
-			<groupId>com.alibaba</groupId>
-            <artifactId>dubbo</artifactId>
-            <version>2.5.3</version>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>dubbo</artifactId>
+		    <version>2.5.3</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework</groupId>
@@ -185,38 +188,19 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- dubbo -->
         
 		<!-- zookeeper -->
 		<dependency>
 			<groupId>org.apache.zookeeper</groupId>
 			<artifactId>zookeeper</artifactId>
 			<version>3.4.6</version>
-			<exclusions>
-				<exclusion>
-					<groupId>log4j</groupId>
-					<artifactId>log4j</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-log4j12</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
-		<dependency>
-			<groupId>com.101tec</groupId>
-			<artifactId>zkclient</artifactId>
-			<version>0.10</version>
-			<exclusions>
-				<exclusion>
-					<groupId>log4j</groupId>
-					<artifactId>log4j</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-log4j12</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+		<dependency>  
+            <groupId>com.github.sgroschupf</groupId>  
+            <artifactId>zkclient</artifactId>  
+            <version>0.1</version>  
+        </dependency> 
 		<!-- zookeeper -->
 		
 	</dependencies>

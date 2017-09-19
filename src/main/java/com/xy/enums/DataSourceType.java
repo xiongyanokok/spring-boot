@@ -11,10 +11,10 @@ public enum DataSourceType {
 	/**
 	 * 写数据源
 	 */
-	writeDataSource,
+	WRITEDATASOURCE,
 	
 	/**
 	 * 读数据源
 	 */
-	readDataSource
+	READDATASOURCE
 }

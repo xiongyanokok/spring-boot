@@ -43,7 +43,7 @@ public class DynamicDataSourceConfiguration {
 	@Primary
 	public DynamicDataSource dynamicDataSource() {
 		Map<Object, Object> targetDataSources = new HashMap<>();
-		targetDataSources.put(DataSourceType.writeDataSource, writeDataSource);
+		targetDataSources.put(DataSourceType.WRITEDATASOURCE, writeDataSource);
 		int i = 0;
 		for (DataSource readDataSource : readDataSources) {
 			targetDataSources.put(i++, readDataSource);

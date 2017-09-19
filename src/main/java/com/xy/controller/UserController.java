@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hexun.px.service.ClassService;
 import com.hexun.px.model.Class;
+import com.hexun.px.service.ClassService;
 import com.xy.annotation.JsonFilter;
-import com.xy.disconf.CommonDisconf;
 import com.xy.plugin.JsonFilterConfig;
 import com.xy.plugin.RedisConfiguration;
 import com.xy.pojo.User;
@@ -28,7 +27,7 @@ public class UserController {
 	private ClassService classService;
 	
 	@Autowired
-	private RedisConfiguration redisConfig;
+	private RedisConfiguration<String, String> redisConfig;
 	
 	@RequestMapping(value = "/class/{classId}", method = RequestMethod.GET)
 	public Class getClass(@PathVariable Integer classId) {

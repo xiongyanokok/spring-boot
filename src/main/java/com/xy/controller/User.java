@@ -1,10 +1,7 @@
 package com.xy.controller;
 
-import org.springframework.data.annotation.Id;
-
 public class User {
 
-	@Id
 	private Integer id;
 	private String name;
 	private Integer max;

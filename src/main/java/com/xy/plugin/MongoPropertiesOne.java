@@ -27,8 +27,8 @@ import com.mongodb.ServerAddress;
  * @author Stephane Nicoll
  * @author Nasko Vasilev
  */
-@Configuration
-@ConfigurationProperties(prefix = "spring.data.mongodb1")
+//@Configuration
+//@ConfigurationProperties(prefix = "spring.data.mongodb1")
 public class MongoPropertiesOne {
 
 	/**

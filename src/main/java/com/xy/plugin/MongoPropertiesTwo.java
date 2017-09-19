@@ -27,8 +27,8 @@ import org.springframework.core.env.Environment;
  * @author Stephane Nicoll
  * @author Nasko Vasilev
  */
-@Configuration
-@ConfigurationProperties(prefix = "spring.data.mongodb2")
+//@Configuration
+//@ConfigurationProperties(prefix = "spring.data.mongodb2")
 public class MongoPropertiesTwo {
 
 	/**

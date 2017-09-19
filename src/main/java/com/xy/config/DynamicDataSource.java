@@ -40,7 +40,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 	@Override
 	protected Object determineCurrentLookupKey() {
 		DataSourceType dataSourceType = DataSourceContextHolder.getDataSourceType();
-		if (null == dataSourceType || DataSourceType.writeDataSource.equals(dataSourceType)) {
+		if (null == dataSourceType || DataSourceType.WRITEDATASOURCE.equals(dataSourceType)) {
 			// 读写数据源
 			return dataSourceType;
 		}

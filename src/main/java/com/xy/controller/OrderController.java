@@ -28,13 +28,13 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
-	@Resource(name="mongoTemplateOne")
+	//@Resource(name="mongoTemplateOne")
 	private MongoTemplate mongoTemplateOne;
 	
-	@Resource(name="mongoTemplateTwo")
+	//@Resource(name="mongoTemplateTwo")
 	private MongoTemplate mongoTemplateTwo;
 	
-	@Resource(name="mongoTemplateThree")
+	//@Resource(name="mongoTemplateThree")
 	private MongoTemplate mongoTemplateThree;
 	
 	@RequestMapping(value = "/order/save", method = RequestMethod.GET)

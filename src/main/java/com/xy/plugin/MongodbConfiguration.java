@@ -16,7 +16,7 @@ import com.mongodb.MongoClient;
  * @author xiongyan
  * @date 2017年3月28日 下午5:55:53
  */
-@Configuration
+//@Configuration
 public class MongodbConfiguration {
 	
 	@Autowired

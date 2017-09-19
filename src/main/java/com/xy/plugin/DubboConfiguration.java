@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ImportResource;
  * @date 2017年3月28日 下午5:55:53
  */
 @Configuration
-@ImportResource("classpath:/spring/applicationContext-dubbo.xml")
+@ImportResource("classpath:spring/applicationContext-dubbo.xml")
 public class DubboConfiguration {
-		
+	
 }
