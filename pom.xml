@@ -166,6 +166,12 @@
 			<groupId>com.hexun</groupId>
 			<artifactId>px-interface</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+			<exclusions>
+                <exclusion>
+                    <groupId>com.hexun</groupId>
+                    <artifactId>hwcommon</artifactId>
+                </exclusion>
+            </exclusions>
 		</dependency>
 		
 		<!-- disconf -->

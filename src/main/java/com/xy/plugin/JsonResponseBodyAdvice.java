@@ -77,12 +77,14 @@ public class JsonResponseBodyAdvice<T> implements ResponseBodyAdvice<T> {
 				if (StringUtils.isNotEmpty(jsonpFunction)) {
 					generator.writeRaw("/**/");
 					generator.writeRaw(jsonpFunction + "(" );
-					writer.writeValue(generator, body);
+				}
+				
+				writer.writeValue(generator, body);
+				if (StringUtils.isNotEmpty(jsonpFunction)) {
 					generator.writeRaw(");");
-				} else {
-					writer.writeValue(generator, body);
 				}
 				generator.flush();
+				generator.close();
 				return null;
 			} catch (IOException e) {
 				logger.error("失败：", e);
@@ -91,8 +93,7 @@ public class JsonResponseBodyAdvice<T> implements ResponseBodyAdvice<T> {
 		
 		if (StringUtils.isNotEmpty(jsonpFunction)) {
 			MappingJacksonValue bodyContainer = new MappingJacksonValue(body);
-			MediaType mediaType = new MediaType("application", "javascript");
-			response.getHeaders().setContentType(mediaType);
+			response.getHeaders().setContentType(MediaType.APPLICATION_JSON_UTF8);
 			bodyContainer.setJsonpFunction(jsonpFunction);
 			return (T) bodyContainer;
 		}
